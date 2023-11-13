@@ -44,8 +44,14 @@ export default function Notes(){
         setValue("");
     }
 
+    function setChangedExercise(index, value){
+        const exerciseCopy = [...exercise];
+        exerciseCopy[index]['name'] = value;
+        setExercise([...exercise.slice(0, index), exerciseCopy[index], ...exercise.slice(index + 1)]);
+    }
+
     const list = exercise.map((elem, index) => {
-        return <Exercise key={elem.id} elem={elem.name} index={index} deleteElem={deleteElem} />
+    return <Exercise key={elem.id} elem={elem.name} index={index} deleteElem={deleteElem} setChangedExercise={setChangedExercise} />
     });
 
     return(
